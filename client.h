@@ -1,13 +1,13 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include <string>
-
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
 #include <cstring>
 #include <iostream>
+
+#include <string>
 
 typedef sockaddr SA;
 const int MAXLINE = 255;
@@ -26,6 +26,5 @@ private:
     char recv_line[255];
     std::string send_line;
 };
-
 
 #endif // CLIENT_H
