@@ -6,4 +6,5 @@ Client part has command line interface.
 Supported commands are connect, disconnect and get_time.
 
 g++ server.cpp -o server -lpthread && ./server
+
 g++ client.cpp -o client -lpthread && ./client
