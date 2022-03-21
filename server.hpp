@@ -50,8 +50,7 @@ static void* serverThreadRoutine(void *arg)
                 break;
             }
 
-            recvLine = recvLine + "\n\r";
-            std::cout<< recvLine << std::endl;
+            recvLine += "\n\r";
             send(_connfd, recvLine.c_str(), recvLine.size(), 0);
         }
 
