@@ -25,6 +25,4 @@ private:
     std::string sendLine;
 };
 
-#include "client.hpp"
-
 #endif // CLIENT_H

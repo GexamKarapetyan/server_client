@@ -1,7 +1,10 @@
 #include "client.h"
-#include "helper.h"
 
 #include <string>
+#include <iostream>
+
+extern std::pair<std::string, int> connection();
+extern bool CLICommandChecker(std::string command);
 
 int main()
 {	

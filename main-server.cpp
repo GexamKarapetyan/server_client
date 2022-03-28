@@ -1,8 +1,8 @@
 #include "server.h"
-#include "helper.h"
 
 #include <string>
 
+extern std::pair<std::string, int> connection();
 
 int main()
 {

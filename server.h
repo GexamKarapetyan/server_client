@@ -31,6 +31,4 @@ private:
     pthread_t tid;
 };
 
-#include "server.hpp"
-
 #endif // SERVER_H
