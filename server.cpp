@@ -5,13 +5,16 @@
 #include <cstring>
 #include <regex>
 
+int Server::ID = 1110;
 static void* serverThreadRoutine(void *arg)
     {
+        int number = ++Server::ID;
         int _connfd;
         int n;
         char getLine[MAXLINE];
         int pid;
         int recvLine_len;
+        std::cout<< "Connected"<<" info( \""<<number<<"\" client )" <<std::endl;  
 
         _connfd = *(int*)arg;
         pthread_detach(pthread_self());
@@ -26,7 +29,7 @@ static void* serverThreadRoutine(void *arg)
             bzero(getLine, MAXLINE);
             n = recv(_connfd, getLine, MAXLINE, 0);
             
-            std::cout << getLine << std::endl;
+            //std::cout << getLine << std::endl;
 
             if (n < 0)
             {
@@ -46,12 +49,13 @@ static void* serverThreadRoutine(void *arg)
             }
             else if(recvLine.find(COMMANDS::DISCONNECT) < recvLine.size())
             {
+                std::cout<< "disconnected"<<" info( \""<<number<<"\" client )" <<std::endl;
                 recvLine = "thank you\n\r" ;
-                send(_connfd, &recvLine[0], recvLine.size(), 0);
+                send(_connfd, recvLine.c_str(), recvLine.size(), 0);
                 break;
             }
-
-            recvLine += "\n\r";
+            std::cout<< "get a command"<<" info( \""<<number<<"\" client )" <<std::endl;
+            recvLine += "\r";
             send(_connfd, recvLine.c_str(), recvLine.size(), 0);
         }
 

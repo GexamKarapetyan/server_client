@@ -21,6 +21,7 @@ const int  MAXLINE = 255;
 class Server
 {
 public:
+    static int ID;
     Server(std::string,int);
     void acceptClients();
 private:

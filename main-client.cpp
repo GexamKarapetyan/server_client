@@ -4,7 +4,7 @@
 #include <iostream>
 
 extern std::pair<std::string, int> connection();
-extern bool CLICommandChecker(std::string command);
+extern bool CLICommandChecker(const std::string&);
 
 int main()
 {	
@@ -15,18 +15,26 @@ int main()
 	std::string str;
 	while (str != "disconnect")
 	{
-		std::cout << " -> ";
+		std::cout << "$ ";
 		std::getline(std::cin, str);
 
         if(!CLICommandChecker(str))
 		{
             socket.sendAndRecv(str);
         }
+		else if(str == "")
+		{
+			continue;
+		}
+		else if (str == "clear")
+		{
+			std::system("clear");
+			continue;
+		}
         else{
-            std::cout << "Wrong command" << std::endl;
+            std::cout << str<<": command not found" << std::endl;
         }
 
-		std::cout << std::endl;
 	}
 
 	return 0;

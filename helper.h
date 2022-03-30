@@ -10,7 +10,7 @@
 
 namespace COMMANDS
 {
-	const std::string HELP{"--help"};
+	const std::string HELP{"help"};
 	const std::string TIME{"get_time"};
 	const std::string DISCONNECT{"disconnect"};
 }
@@ -22,14 +22,16 @@ std::regex regexPort("^([0-9]{3}|[0-9]{4}|[0-9]{5})$");
 std::string CLICommandHelper()
 {
     std::string str;
-    str = "a. connect <IP_ADDRESS> <PORT> (Where the “IP_ADDRESS” is IP Address of the Server and the “PORT” is Server Port Number)\n";
+	str.reserve(100);
+    str = "a. setup_conn <IP_ADDRESS> <PORT> (Where the “IP_ADDRESS” is IP Address of the Server and the “PORT” is Server Port Number)\n";
     str += "b. disconnect\n";
     str += "c. get_time\n";
-    str += "d. --help\n"; 
+    str += "d. help\n";
+    str += "e. clear\n";
 	return str;
 }
 
-bool CLICommandChecker(std::string command)
+bool CLICommandChecker(const std::string& command)
 {
     if( command.find(COMMANDS::HELP) < command.size() 
 					|| command.find(COMMANDS::TIME) < command.size() 
@@ -46,7 +48,7 @@ std::pair<std::string, int> dataParser(std::string conception)
 	int port;
 
 	stream >> IpAdress;
-	if(IpAdress != "connect")
+	if(IpAdress != "setup_conn")
 	{
 		std::cerr << "invalid command" << std::endl;
 		exit(0);
@@ -71,7 +73,7 @@ std::pair<std::string, int> connection()
 {
     std::string connectionData(COMMANDS::HELP);
 
-	std::cout << "for connection enter ip_adress and port_number" << "(for help enter --help) " << std::endl;
+	std::cout << "for connection enter ip_adress and port_number" << "(for help enter help) " << std::endl;
 	while (connectionData == COMMANDS::HELP)
 	{
 		std::getline(std::cin, connectionData);
